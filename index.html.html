@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Camila ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  background: linear-gradient(#1a1a1a, #2c3e50);
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  color: white;
+}
+
+/* LAYOUT */
+.main {
+  display: flex;
+  height: 100vh;
+}
+
+/* TEXTO LADO IZQUIERDO */
+.text-side {
+  width: 50%;
+  padding: 40px;
+  overflow-y: auto;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+}
+
+.text-side h1 {
+  font-size: 32px;
+}
+
+.text-side p {
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.timer {
+  margin-top: 15px;
+  color: #ffd700;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  background: #ffd700;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* LADO DERECHO VISUAL */
+.visual-side {
+  width: 50%;
+  position: relative;
+}
+
+/* árbol */
+.tree {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 140px;
+  opacity: 0.5;
+}
+
+/* pétalos */
+.petal {
+  position: absolute;
+  font-size: 20px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+/* responsive (celular) */
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+  .text-side, .visual-side {
+    width: 100%;
+    height: 50%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="main">
+
+  <!-- TEXTO -->
+  <div class="text-side">
+    <h1>Para Camila 🌼</h1>
+
+    <p>
+No sé cómo explicarlo bien…<br><br>
+
+pero desde que llegaste tú,<br>
+todo se siente distinto.<br><br>
+
+No es solo que me gustes…<br>
+es que contigo me siento tranquilo,<br>
+feliz… como en casa 💛<br><br>
+
+A veces me quedo pensando en ti<br>
+sin razón…<br>
+y eso nunca me había pasado así.<br><br>
+
+Y aunque llevamos poquito,<br>
+estos 2 meses y 12 días<br>
+han significado más de lo que esperaba 🌼<br><br>
+
+De verdad me haces bien, Camila.
+    </p>
+
+    <div class="timer" id="timer"></div>
+
+    <button onclick="startExperience()">Abrir 💌</button>
+
+    <p>
+Si algún día dudas…<br>
+recuerda que hay alguien aquí<br>
+que te quiere de verdad 💛
+    </p>
+
+    <p>
+Ese rodillazo que me diste tipo MMA<br>
+es algo que jamás voy a olvidar JAJAJA 🥲<br><br>
+
+Te amo de maneras en las que jamás nadie podrá hacerlo…<br>
+y espero que nosotros tengamos<br>
+todo lo que antes no tuvimos 🌼
+    </p>
+  </div>
+
+  <!-- VISUAL -->
+  <div class="visual-side">
+    <div class="tree">🌳</div>
+  </div>
+
+</div>
+
+<audio id="music">
+  <source src="vinculo.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// tiempo
+let startDate = new Date();
+startDate.setMonth(startDate.getMonth() - 2);
+startDate.setDate(startDate.getDate() - 12);
+
+function updateTimer() {
+  let now = new Date();
+  let diff = now - startDate;
+
+  let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  let minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+  document.getElementById("timer").innerHTML =
+    "Nuestro amor comenzó hace:<br>" +
+    days + " días, " + hours + " horas, " + minutes + " minutos 💛";
+}
+
+setInterval(updateTimer, 1000);
+
+// pétalos
+setInterval(() => {
+  let petal = document.createElement("div");
+  petal.classList.add("petal");
+
+  let flowers = ["🌼","💛","✨"];
+  petal.innerHTML = flowers[Math.floor(Math.random()*flowers.length)];
+
+  petal.style.left = Math.random() * 100 + "vw";
+  petal.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+  document.body.appendChild(petal);
+
+  setTimeout(() => petal.remove(), 10000);
+}, 500);
+
+// música
+function startExperience() {
+  let music = document.getElementById("music");
+  music.volume = 0;
+  music.play();
+
+  let vol = 0;
+  let fade = setInterval(() => {
+    if (vol < 1) {
+      vol += 0.05;
+      music.volume = vol;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
+
+  alert("💛 Esto es para ti, Camila 💛");
+}
+</script>
+
+</body>
+</html>
